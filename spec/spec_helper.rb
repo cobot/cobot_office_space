@@ -32,6 +32,6 @@ RSpec.configure do |config|
   def log_in(user = stub('user'))
     user.stub(:id) {1} unless user.respond_to?(:id)
     session[:user_id] = user.id
-    User.stub(:find).with(user.id) {user}
+    User.stub(:find_by_id).with(user.id) {user}
   end
 end

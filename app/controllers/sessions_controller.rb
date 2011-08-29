@@ -16,7 +16,7 @@ class SessionsController < ApplicationController
   end
 
   def failure
-    flash[:failure] = "Sorry, something went wrong. Please try again."
+    flash[:failure] = "There was a problem: #{params[:message]}"
     redirect_to root_path
   end
 
@@ -58,7 +58,11 @@ class SessionsController < ApplicationController
   end
 
   def oauth_token
-    @access_token ||= OAuth2::AccessToken.new(oauth_client, current_user.oauth_token)
+    unless @access_token
+      @access_token = OAuth2::AccessToken.new(oauth_client, current_user.oauth_token)
+      @access_token.options[:header_format] = "OAuth %s"
+    end
+    @access_token
   end
 
   def oauth_client
