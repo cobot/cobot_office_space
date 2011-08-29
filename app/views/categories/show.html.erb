@@ -1,4 +1,4 @@
-<h1><%= @category.name %></h1>
+<h1><%= link_to @space.name, @space %> / <%= @category.name %></h1>
 
 <ul>
   <% @category.resources.each do |resource| %>
@@ -10,3 +10,5 @@
     </li>
   <% end %>
 </ul>
+
+<p><%= link_to 'back', [@space] %></p>

@@ -8,10 +8,32 @@
 </head>
 <body>
 
-<navigation>
-  <%= link_to 'Home', spaces_path %>
-</navigation>
-<%= yield %>
+  <div class="container">
+  <h1 class="logo">Office Space</h1>
 
+  <div class="header">
+      <% if current_user %>
+      <nav>
+        <%= link_to 'Home', spaces_path %>
+      </nav>
+    <% end %>
+  </div>
+
+  <% flash.each do |type, message| %>
+    <% if message %>
+      <p class="flash <%= type %>"><%= message %></p>
+    <% end %>
+  <% end %>
+
+  <div class="main">    
+    <%= yield %>
+  </div>
+
+  <div class="footer">
+    <p class="left">
+      &copy; <%= Date.today.year %> 
+      <%= link_to "Upstream - Agile GmbH", "http://upstre.am" %>
+    </p>
+  </div>
 </body>
 </html>

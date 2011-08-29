@@ -13,8 +13,8 @@ describe CategoriesController, 'create' do
     space.stub_chain(:categories, :build) {category}
     Space.stub(:find_by_name!) {space}
 
-    category.resources.should_receive(:create).with(name: 'Small Office 1')
-    category.resources.should_receive(:create).with(name: 'Small Office 2')
+    category.resources.should_receive(:create).with(name: 'Small Office 01')
+    category.resources.should_receive(:create).with(name: 'Small Office 02')
 
     post :create, space_id: 'co-up'
   end

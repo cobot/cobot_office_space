@@ -1,6 +1,8 @@
-<h1><%= @resource.name %></h1>
+<h1><%= link_to @space.name, @space %> / <%= link_to @category.name, [@space, @category] %> / <%= @resource.name %></h1>
 
 <%= simple_form_for [@space, @category, @resource] do |f| %>
   <%= f.association :member, collection: @space.members %>
   <%= f.submit 'Assign Member' %>
 <% end %>
+
+<p><%= link_to 'back', [@space, @category] %></p>
