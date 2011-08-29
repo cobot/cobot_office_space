@@ -1,7 +1,7 @@
 class Space < ActiveRecord::Base
   before_create :set_name
   has_many :categories
-  has_many :members
+  has_many :members, order: 'name'
 
   def to_param
     name
