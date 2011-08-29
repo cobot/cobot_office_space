@@ -8,6 +8,14 @@ describe SpacesController, 'index' do
 
     response.should redirect_to(space_path('co-up'))
   end
+
+  it 'renders index if user has no spaces' do
+    log_in stub(:user, admin_of_space_names: [])
+    
+    get :index
+
+    response.should render_template('index')
+  end
 end
 
 describe SpacesController, 'show' do

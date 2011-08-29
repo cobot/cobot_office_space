@@ -1,6 +1,8 @@
 class SpacesController < ApplicationController
   def index
-    redirect_to space_path(current_user.admin_of_space_names.first)
+    if space = current_user.admin_of_space_names.first
+      redirect_to space_path(space)
+    end
   end
 
   def show
