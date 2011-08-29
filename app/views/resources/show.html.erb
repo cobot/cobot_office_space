@@ -1,0 +1,6 @@
+<h1><%= @resource.name %></h1>
+
+<%= simple_form_for [@space, @category, @resource] do |f| %>
+  <%= f.association :member, collection: @space.members %>
+  <%= f.submit 'Assign Member' %>
+<% end %>

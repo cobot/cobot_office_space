@@ -7,10 +7,11 @@ class SessionsController < ApplicationController
   def create
     auth = request.env['omniauth.auth']
     user = create_or_update_user(auth)
-    auth['extra']['user_hash']['admin_of'].each do |hash|
-      Space.create url: hash['space_link'] unless Space.find_by_url(hash['space_link'])
-    end
     session[:user_id] = user.id
+    auth['extra']['user_hash']['admin_of'].each do |hash|
+      space = create_space(hash['space_link'])
+      create_members(space)
+    end
     redirect_to spaces_path
   end
 
@@ -20,6 +21,26 @@ class SessionsController < ApplicationController
   end
 
   private
+
+  def create_space(url)
+    unless space = Space.find_by_url(url)
+      space = Space.create url: url 
+    end
+    space
+  end
+
+  def create_members(space)
+    cobot_get("https://#{space.name}.cobot.me/api/memberships").each do |member_hash|
+      unless space.members.find_by_cobot_member_id(member_hash['id'])
+        space.members.create name: member_hash['address']['name'],
+          cobot_member_id: member_hash['id']
+      end
+    end
+  end
+
+  def cobot_get(url)
+    JSON.parse(oauth_token.get(url).body)
+  end
 
   def create_or_update_user(auth)
     unless @user
@@ -34,5 +55,21 @@ class SessionsController < ApplicationController
       end
     end
     @user
+  end
+
+  def oauth_token
+    @access_token ||= OAuth2::AccessToken.new(oauth_client, current_user.oauth_token)
+  end
+
+  def oauth_client
+    @client ||= OAuth2::Client.new(ENV['COBOT_CLIENT_ID'],
+      ENV['COBOT_CLIENT_SECRET'],
+      site: {
+         url: 'https://www.cobot.me',
+         ssl: {
+           verify: false
+         }
+      }
+    )
   end
 end

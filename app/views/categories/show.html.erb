@@ -2,6 +2,11 @@
 
 <ul>
   <% @category.resources.each do |resource| %>
-    <li><%= resource.name %></li>
+    <li>
+      <%= link_to resource.name, [@space, @category, resource] %>
+      <% if resource.member %>
+        (<%= resource.member.name %>)
+      <% end %>
+    </li>
   <% end %>
 </ul>

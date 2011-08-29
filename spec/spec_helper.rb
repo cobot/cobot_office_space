@@ -25,6 +25,10 @@ RSpec.configure do |config|
   # instead of true.
   config.use_transactional_fixtures = true
 
+  config.before(:each) do
+    WebMock.disable_net_connect!
+  end
+
   def log_in(user = stub('user'))
     user.stub(:id) {1} unless user.respond_to?(:id)
     session[:user_id] = user.id

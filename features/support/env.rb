@@ -48,3 +48,5 @@ end
 #     DatabaseCleaner.strategy = :transaction
 #   end
 #
+
+WebMock.disable_net_connect!

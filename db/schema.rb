@@ -11,12 +11,20 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110829122140) do
+ActiveRecord::Schema.define(:version => 20110829140343) do
 
   create_table "categories", :force => true do |t|
     t.integer "space_id"
     t.string  "name"
   end
+
+  create_table "members", :force => true do |t|
+    t.integer "space_id"
+    t.string  "name"
+    t.string  "cobot_member_id"
+  end
+
+  add_index "members", ["space_id"], :name => "index_members_on_space_id"
 
   create_table "resources", :force => true do |t|
     t.integer "category_id"
