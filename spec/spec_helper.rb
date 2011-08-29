@@ -24,4 +24,10 @@ RSpec.configure do |config|
   # examples within a transaction, remove the following line or assign false
   # instead of true.
   config.use_transactional_fixtures = true
+
+  def log_in(user)
+    user.stub(:id) {1} unless user.respond_to?(:id)
+    session[:user_id] = user.id
+    User.stub(:find).with(user.id) {user}
+  end
 end
