@@ -1,0 +1,7 @@
+<h1><%= @category.name %></h1>
+
+<ul>
+  <% @category.resources.each do |resource| %>
+    <li><%= resource.name %></li>
+  <% end %>
+</ul>

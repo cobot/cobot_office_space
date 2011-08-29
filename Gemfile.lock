@@ -116,6 +116,7 @@ GEM
       thor (~> 0.14)
     json (1.5.3)
     json_pure (1.5.3)
+    launchy (2.0.3)
     mail (2.3.0)
       i18n (>= 0.4.0)
       mime-types (~> 1.16)
@@ -227,6 +228,7 @@ DEPENDENCIES
   database_cleaner
   inherited_resources
   jquery-rails
+  launchy
   omniauth!
   pg
   rails (= 3.1.0.rc8)

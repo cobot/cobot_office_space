@@ -1,0 +1,7 @@
+<h1>Add Category</h1>
+
+<%= simple_form_for [@space, @category] do |f| %>
+  <%= f.input :name %>
+  <%= f.input :no_of_resources, label: 'No. of resources' %>
+  <%= f.submit 'Add Category' %>
+<% end %>

@@ -5,6 +5,6 @@ OfficeSpace::Application.routes.draw do
   match '/auth/failure', :to => 'sessions#failure'
 
   resources :spaces, only: [:index, :show] do
-    resources :categories, only: [:new, :create]
+    resources :categories, only: [:new, :create, :show]
   end
 end

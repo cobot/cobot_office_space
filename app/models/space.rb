@@ -1,5 +1,6 @@
 class Space < ActiveRecord::Base
   before_create :set_name
+  has_many :categories
 
   def to_param
     name

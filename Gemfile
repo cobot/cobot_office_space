@@ -29,4 +29,5 @@ group :test do
   gem 'cucumber-rails'
   gem 'capybara'
   gem 'webmock'
+  gem 'launchy'
 end

@@ -1,3 +1,9 @@
 <h1><%= @space.name %></h1>
 
-<p>Actions: <%= link_to 'Add Category', new_space_category_path(@space) %></p>
+<ul>
+  <% @space.categories.each do |category| %>
+    <li><%= link_to category.name, [@space, category] %></li>
+  <% end %>
+</ul>
+
+<p><%= link_to 'Add Category', new_space_category_path(@space) %></p>
