@@ -1,5 +1,7 @@
 <h1><%= link_to @space.name, @space %> / <%= @category.name %></h1>
 
+<p><%= link_to 'Remove Category', [@space, @category], method: :delete %></p>
+
 <ul>
   <% @category.resources.each do |resource| %>
     <li>

@@ -12,4 +12,10 @@ class CategoriesController < ApplicationController
       end
     end
   end
+
+  def destroy
+    super do
+      space_path(@space)
+    end  
+  end
 end

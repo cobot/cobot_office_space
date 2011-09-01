@@ -19,15 +19,15 @@ Given /^on cobot I have a space "([^\"]*)"$/ do |space_name|
       }
     }
   }
+  WebMock.stub_request(:get, "https://#{space_name}.cobot.me/api/memberships").to_return(
+    body: [].to_json,
+  )
 end
 
 Given /^the space "([^"]*)" has a member "([^"]*)" on cobot$/ do |space_name, member_name|
-  WebMock.stub_request(:get, "https://co-up.cobot.me/api/memberships").to_return(
+  WebMock.stub_request(:get, "https://#{space_name}.cobot.me/api/memberships").to_return(
     body: [
       {id: '2359', address: {name: member_name}}
-    ].to_json,
-    headers: {
-      content_type: 'application/json'
-    }
+    ].to_json
   )
 end
