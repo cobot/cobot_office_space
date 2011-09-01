@@ -9,6 +9,10 @@ class ResourcesController < ApplicationController
     }
   end
 
+  def destroy
+    super {space_category_path(@space, @category)}
+  end
+
   private
 
   def load_space
