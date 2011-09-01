@@ -7,7 +7,7 @@ OfficeSpace::Application.routes.draw do
   resource :session, only: :destroy
   resources :spaces, only: [:index, :show] do
     resources :categories, only: [:new, :create, :show, :destroy] do
-      resources :resources, only: [:show, :update, :destroy]
+      resources :resources, only: [:new, :create, :show, :update, :destroy]
     end
   end
 end

@@ -15,3 +15,9 @@ Scenario: delete resource
   When I remove the resource "Small Office 2"
   Then I should see that the category "Small Office" has no resource "Small Office 2"
   
+ Scenario: add resources
+   Given on cobot I have a space "co-up"
+  	And I am logged in
+    And the space "co-up" has a category "Small Office"
+  When I add the resource "Small Office 1"
+  Then I should see a category "Small Office" with the resources "Small Office 1"	

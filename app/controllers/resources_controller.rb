@@ -4,9 +4,11 @@ class ResourcesController < ApplicationController
   belongs_to :category
 
   def update
-    super {
-      space_category_path(@space, @category)
-    }
+    super {space_category_path(@space, @category)}
+  end
+
+  def create
+    super {space_category_path(@space, @category)}
   end
 
   def destroy

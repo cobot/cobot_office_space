@@ -5,6 +5,14 @@ When /^I remove the resource "([^"]*)"$/ do |name|
   click_link 'Remove Resource'
 end
 
+When /^I add the resource "([^"]*)"$/ do |name|
+  visit spaces_path
+  click_link name.sub(/\s\d+$/, '')
+  click_link 'Add Resource'
+  fill_in 'Name', with: name
+  click_button 'Add Resource'
+end
+
 Then /^I should see a category "([^"]*)" with the resources "([^"]*)"$/ do |name, offices|
   click_link 'Home'
   click_link name
