@@ -2,7 +2,7 @@ class Space < ActiveRecord::Base
   before_create :set_name
   has_many :categories
   has_many :members, order: 'name'
-  has_many :resources, through: :categories
+  has_many :resources, through: :categories, order: 'name'
 
   def to_param
     name

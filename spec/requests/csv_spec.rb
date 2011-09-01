@@ -6,7 +6,8 @@ describe 'download resources as csv' do
     space = Space.create! url: 'http://www.cobot.me/api/spaces/co-up'
     category = space.categories.create! name: 'Small Office'
     member = space.members.create! name: 'Joe'
-    resource = category.resources.create! name: 'Office 1', member: member
+    category.resources.create! name: 'Office 1', member: member
+    category.resources.create! name: 'Office 2'
     log_in user, space
 
     get space_path(space, format: :csv)
@@ -14,6 +15,7 @@ describe 'download resources as csv' do
     response.body.should == <<-CSV
 Resource|Category|Member
 Office 1|Small Office|Joe
+Office 2|Small Office|
 CSV
   end
 
