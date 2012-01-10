@@ -2,12 +2,12 @@ require 'spec_helper'
 
 describe SessionsController, '#create' do
   before(:each) do
-    User.stub(:find_by_login)
+    User.stub(:find_by_email)
     User.stub(:create) {stub.as_null_object}
     User.stub(:find_by_id) {stub(:user).as_null_object}
     Space.stub(:create) {stub(name: 'co-up').as_null_object}
     Space.stub(:find_by_url)
-    @access_token = stub(:accessToken, get: stub(:response, body: '[]')).as_null_object
+    @access_token = stub(:access_token, get: stub(:response, body: '[]')).as_null_object
     OAuth2::AccessToken.stub(:new) {@access_token}
   end
 
@@ -26,7 +26,7 @@ describe SessionsController, '#create' do
   end
 
   it 'tries to find the user' do
-    User.should_receive(:find_by_login).with('joe')
+    User.should_receive(:find_by_email).with('joe@doe.com')
 
     get :create, provider: 'cobot'
   end
@@ -34,7 +34,7 @@ describe SessionsController, '#create' do
   it 'creates a user if none found' do
     User.stub(:find_by_login) {nil}
 
-    User.should_receive(:create).with(login: 'joe', email: 'joe@doe.com',
+    User.should_receive(:create).with(email: 'joe@doe.com',
       oauth_token: '12345', admin_of: ['https://www.cobot.me/api/spaces/co-up'])
 
     get :create, provider: 'cobot'
@@ -42,10 +42,9 @@ describe SessionsController, '#create' do
 
   it 'updates an existing user if one found' do
     user = stub(:user).as_null_object
-    User.stub(:find_by_login) {user}
+    User.stub(:find_by_email) {user}
 
-    user.should_receive(:update_attributes).with(email: 'joe@doe.com',
-      admin_of: ['https://www.cobot.me/api/spaces/co-up'])
+    user.should_receive(:update_attributes).with(admin_of: ['https://www.cobot.me/api/spaces/co-up'])
 
     get :create, provider: 'cobot'
   end
@@ -92,7 +91,7 @@ describe SessionsController, '#create' do
   end
 
   it 'sets the user id in the session' do
-    User.stub(:find_by_login) {stub(:user, id: 1).as_null_object}
+    User.stub(:find_by_email) {stub(:user, id: 1).as_null_object}
 
     get :create, provider: 'cobot'
 

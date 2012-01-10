@@ -2,17 +2,16 @@ Given /^on cobot I have a space "([^\"]*)"$/ do |space_name|
   subdomain = space_name.gsub(/\W+/, '-')
 
   OmniAuth.config.mock_auth[:cobot] = {
-    "provider"=>"cobot", 
-    "uid"=>"janesmith", 
+    "provider"=>"cobot",
+    "uid"=>"janesmith",
     "credentials"=>{"token"=>"12345"},
-    "user_info"=>{"name"=>"janesmith", 
-        "email"=>"janesmith@example.com"}, 
-    "extra"=>{
-      "user_hash"=>{
-        "login"=>"janesmith", 
-        "email"=>"janesmith@example.com", 
-        "id"=>"user-janesmith", 
-        "memberships"=>[], 
+    "user_info"=> {
+        "email"=>"janesmith@example.com"},
+    "extra"=> {
+      "user_hash"=> {
+        "email"=>"janesmith@example.com",
+        "id"=>"123456",
+        "memberships"=>[],
         "admin_of"=>[
           {"space_link"=>"https://www.cobot.me/api/spaces/#{subdomain}"}
         ]

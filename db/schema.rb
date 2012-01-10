@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110829140343) do
+ActiveRecord::Schema.define(:version => 20120110163938) do
 
   create_table "categories", :force => true do |t|
     t.integer "space_id"
@@ -44,12 +44,9 @@ ActiveRecord::Schema.define(:version => 20110829140343) do
   add_index "spaces", ["url"], :name => "index_spaces_on_url"
 
   create_table "users", :force => true do |t|
-    t.string "login"
     t.string "email"
     t.string "oauth_token"
     t.string "admin_of"
   end
-
-  add_index "users", ["login"], :name => "index_users_on_login"
 
 end

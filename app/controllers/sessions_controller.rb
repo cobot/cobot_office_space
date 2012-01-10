@@ -30,7 +30,7 @@ class SessionsController < ApplicationController
 
   def create_space(url)
     unless space = Space.find_by_url(url)
-      space = Space.create url: url 
+      space = Space.create url: url
     end
     space
   end
@@ -50,12 +50,10 @@ class SessionsController < ApplicationController
 
   def create_or_update_user(auth)
     unless @user
-      if @user = User.find_by_login(auth['user_info']['name'])
-        @user.update_attributes email: auth['user_info']['email'],
-          admin_of: auth['extra']['user_hash']['admin_of'].map{|hash| hash['space_link']}
+      if @user = User.find_by_email(auth['user_info']['email'])
+        @user.update_attributes admin_of: auth['extra']['user_hash']['admin_of'].map{|hash| hash['space_link']}
       else
-        @user = User.create login: auth['user_info']['name'],
-          email: auth['user_info']['email'],
+        @user = User.create email: auth['user_info']['email'],
           oauth_token: auth['credentials']['token'],
           admin_of: auth['extra']['user_hash']['admin_of'].map{|hash| hash['space_link']}
       end
