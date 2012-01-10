@@ -9,7 +9,7 @@ class SessionsController < ApplicationController
     user = create_or_update_user(auth)
     session[:user_id] = user.id
     auth['extra']['user_hash']['admin_of'].each do |hash|
-      space = create_space(hash['space_link'])
+      space = create_or_update_space(hash['space_link'], auth['user_info']['email'])
       create_members(space)
     end
     redirect_to spaces_path
@@ -28,9 +28,11 @@ class SessionsController < ApplicationController
 
   private
 
-  def create_space(url)
-    unless space = Space.find_by_url(url)
-      space = Space.create url: url
+  def create_or_update_space(url, email)
+    if space = Space.find_by_url(url)
+      space.update_attribute :admins, (space.admins || []) | [email]
+    else
+      space = Space.create url: url, admins: [email]
     end
     space
   end

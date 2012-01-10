@@ -12,4 +12,3 @@ Scenario: add category
     And the space "co-up" has a category "Big Office"
    When I remove the category "Big Office"
    Then I should see no category "Big Office"
- 	

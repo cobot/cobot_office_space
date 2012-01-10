@@ -14,7 +14,7 @@ describe SessionsController, '#create' do
   before(:each) do
     request.env['omniauth.auth'] = {
       "credentials"=>{"token"=>"12345"},
-      'user_info' => {'name' => 'joe', 'email' => 'joe@doe.com'},
+      'user_info' => {'email' => 'joe@doe.com'},
       "extra"=>{
         "user_hash"=>{
           "admin_of"=>[
@@ -52,7 +52,34 @@ describe SessionsController, '#create' do
   it "creates the spaces that don't exist" do
     Space.stub(:find_by_url).with('https://www.cobot.me/api/spaces/co-up') {nil}
 
-    Space.should_receive(:create).with(url: 'https://www.cobot.me/api/spaces/co-up')
+    Space.should_receive(:create).with(url: 'https://www.cobot.me/api/spaces/co-up', admins: ['joe@doe.com'])
+
+    get :create, provider: 'cobot'
+  end
+
+  it 'adds the user as admin to an existing space' do
+    space = stub(:space, admins: ['jane@doe.com']).as_null_object
+    Space.stub(:find_by_url).with('https://www.cobot.me/api/spaces/co-up') {space}
+
+    space.should_receive(:update_attribute).with(:admins, ['jane@doe.com', 'joe@doe.com'])
+
+    get :create, provider: 'cobot'
+  end
+
+  it "adds the user to a space that hasn't set any admins" do
+    space = stub(:space, admins: nil).as_null_object
+    Space.stub(:find_by_url).with('https://www.cobot.me/api/spaces/co-up') {space}
+
+    space.should_receive(:update_attribute).with(:admins, ['joe@doe.com'])
+
+    get :create, provider: 'cobot'
+  end
+
+  it 'does not add a user as admin twice' do
+    space = stub(:space, admins: ['joe@doe.com']).as_null_object
+    Space.stub(:find_by_url).with('https://www.cobot.me/api/spaces/co-up') {space}
+
+    space.should_receive(:update_attribute).with(:admins, ['joe@doe.com'])
 
     get :create, provider: 'cobot'
   end

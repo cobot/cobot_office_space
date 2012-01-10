@@ -15,4 +15,13 @@ class ApplicationController < ActionController::Base
       redirect_to root_path, notice: "Please sign in"
     end
   end
+
+  def check_permission(space)
+    if space.admin?(current_user)
+      yield if block_given?
+    else
+      render file: 'public/403.html', status: 403, layout: false
+    end
+  end
+
 end

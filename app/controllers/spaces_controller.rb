@@ -9,11 +9,13 @@ class SpacesController < ApplicationController
 
   def show
     @space = Space.find_by_name!(params[:id])
-    respond_to do |format|
-      format.html
-      format.csv do
-        render text: space_csv(@space), content_type: 'text/csv'
-      end 
+    check_permission @space do
+      respond_to do |format|
+        format.html
+        format.csv do
+          render text: space_csv(@space), content_type: 'text/csv'
+        end
+      end
     end
   end
 

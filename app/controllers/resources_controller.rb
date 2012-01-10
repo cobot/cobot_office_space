@@ -19,5 +19,6 @@ class ResourcesController < ApplicationController
 
   def load_space
     @space = Space.find_by_name! params[:space_id]
+    check_permission @space
   end
 end

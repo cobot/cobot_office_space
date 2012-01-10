@@ -1,6 +1,7 @@
 class CategoriesController < ApplicationController
   inherit_resources
   belongs_to :space, :finder => :find_by_name!
+  before_filter :check_permission_filter
 
   def create
     super do |success, failure|
@@ -16,6 +17,12 @@ class CategoriesController < ApplicationController
   def destroy
     super do
       space_path(@space)
-    end  
+    end
+  end
+
+  private
+
+  def check_permission_filter
+    check_permission parent
   end
 end
