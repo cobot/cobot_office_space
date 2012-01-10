@@ -1,5 +1,15 @@
 require 'spec_helper'
 
+describe SessionsController, '#new' do
+  it 'redirects to spaces if logged in already' do
+    log_in
+
+    get :new
+
+    response.should redirect_to(spaces_path)
+  end
+end
+
 describe SessionsController, '#create' do
   before(:each) do
     User.stub(:find_by_email)
