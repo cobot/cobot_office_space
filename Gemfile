@@ -1,5 +1,7 @@
 source 'http://rubygems.org'
 
+ruby '2.1.2'
+
 gem 'rails', '~>3.1.10'
 gem 'pg'
 gem 'omniauth', git: 'git://github.com/intridea/omniauth.git'
