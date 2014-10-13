@@ -3,7 +3,7 @@
 <head>
   <title>OfficeSpace</title>
   <%= stylesheet_link_tag    "application" %>
-  <%= javascript_include_tag "application" %>
+  <%= javascript_include_tag 'jquery', 'jquery_ujs' %>
   <%= csrf_meta_tags %>
 </head>
 <body>
@@ -26,13 +26,13 @@
     <% end %>
   <% end %>
 
-  <div class="main">    
+  <div class="main">
     <%= yield %>
   </div>
 
   <div class="footer">
     <p class="left">
-      &copy; <%= Date.today.year %> 
+      &copy; <%= Date.today.year %>
       <%= link_to "Upstream - Agile GmbH", "http://upstre.am" %>
     </p>
   </div>
