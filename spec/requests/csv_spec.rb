@@ -5,8 +5,7 @@ describe 'download resources as csv' do
     user = User.create!
     space = Space.create! url: 'http://www.cobot.me/api/spaces/co-up'
     category = space.categories.create! name: 'Small Office'
-    member = space.members.create! name: 'Joe'
-    category.resources.create! name: 'Office 1', member: member
+    category.resources.create! name: 'Office 1', member_name: 'Joe', member_cobot_id: '1'
     category.resources.create! name: 'Office 2'
     log_in user, space
 
@@ -22,11 +21,11 @@ CSV
   def log_in(user, space)
     OmniAuth.config.mock_auth[:cobot] = {
       "credentials"=>{"token"=>"12345"},
-      "user_info"=>{"name"=>"janesmith", 
-          "email"=>"janesmith@example.com"}, 
+      "user_info"=>{"name"=>"janesmith",
+          "email"=>"janesmith@example.com"},
       "extra"=>{
         "user_hash"=>{
-          "memberships"=>[], 
+          "memberships"=>[],
           "admin_of"=>[
             {"space_link" => space.url}
           ]

@@ -25,7 +25,7 @@ class SpacesController < ApplicationController
     CSV.generate(col_sep: '|') do |csv|
       csv << ['Resource', 'Category', 'Member']
       space.resources(include: :member).each do |r|
-        csv << [r.name, r.category.name, r.member.try(:name)]
+        csv << [r.name, r.category.name, r.member_name]
       end
     end
   end

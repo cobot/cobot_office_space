@@ -11,25 +11,19 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120110165143) do
+ActiveRecord::Schema.define(:version => 20141013134607) do
 
   create_table "categories", :force => true do |t|
     t.integer "space_id"
     t.string  "name"
   end
 
-  create_table "members", :force => true do |t|
-    t.integer "space_id"
-    t.string  "name"
-    t.string  "cobot_member_id"
-  end
-
-  add_index "members", ["space_id"], :name => "index_members_on_space_id"
-
   create_table "resources", :force => true do |t|
     t.integer "category_id"
     t.integer "member_id"
     t.string  "name"
+    t.string  "member_cobot_id"
+    t.string  "member_name"
   end
 
   add_index "resources", ["category_id"], :name => "index_resources_on_category_id"

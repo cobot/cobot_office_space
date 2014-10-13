@@ -2,7 +2,10 @@
 
 <%= simple_form_for [@space, @category, @resource] do |f| %>
   <%= f.input :name %>
-  <%= f.association :member, collection: @space.members %>
+  <div class="input select optional">
+    <%= f.label :member_cobot_id, 'Member' %>
+    <%= f.select :member_cobot_id, @space.members.map {|m| [m.name, m.id] } %>
+  </div>
   <%= f.submit 'Add Resource' %>
 <% end %>
 

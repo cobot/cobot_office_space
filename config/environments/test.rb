@@ -41,4 +41,5 @@ OfficeSpace::Application.configure do
   config.assets.allow_debugging = true
 
   OmniAuth.config.test_mode = true
+  config.cobot_site = 'https://www.cobot.me'
 end

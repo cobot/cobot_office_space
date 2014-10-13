@@ -5,7 +5,8 @@ gem 'pg'
 gem 'omniauth', git: 'git://github.com/intridea/omniauth.git'
 gem 'simple_form'
 gem 'inherited_resources'
-
+gem 'cobot_client'
+gem 'virtus'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -21,12 +22,13 @@ gem 'jquery-rails'
 
 group :development do
   gem 'rspec-rails'
+  gem 'dotenv-rails'
 end
 
 group :test do
   gem 'database_cleaner'
   gem 'turn', require: false
-  gem 'cucumber-rails'
+  gem 'cucumber-rails', require: false
   gem 'capybara'
   gem 'webmock'
   gem 'launchy'

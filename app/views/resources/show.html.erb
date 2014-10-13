@@ -3,7 +3,10 @@
 <p><%= link_to 'Remove Resource', [@space, @category, @resource], method: :delete, confirm: 'Really remove this resource?' %></p>
 
 <%= simple_form_for [@space, @category, @resource] do |f| %>
-  <%= f.association :member, collection: @space.members %>
+  <div class="input select optional">
+    <%= f.label :member_cobot_id, 'Member' %>
+    <%= f.select :member_cobot_id, @space.members.map {|m| [m.name, m.id] } %>
+  </div>
   <%= f.submit 'Assign Member' %>
 <% end %>
 

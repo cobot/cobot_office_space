@@ -1,2 +1,6 @@
-class Member < ActiveRecord::Base
+class Member
+  include Virtus.model
+
+  attribute :id, String
+  attribute :name, String
 end
