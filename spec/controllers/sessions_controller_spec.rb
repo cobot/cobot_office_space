@@ -13,12 +13,12 @@ end
 describe SessionsController, '#create' do
   before(:each) do
     User.stub(:find_by_email)
-    User.stub(:create) {stub.as_null_object}
-    User.stub(:find_by_id) {stub(:user).as_null_object}
-    Space.stub(:create) {stub(name: 'co-up').as_null_object}
+    User.stub(:create) { double.as_null_object }
+    User.stub(:find_by_id) { double(:user).as_null_object }
+    Space.stub(:create) { double(name: 'co-up').as_null_object }
     Space.stub(:find_by_url)
     @access_token = stub(:access_token, get: stub(:response, body: '[]')).as_null_object
-    OAuth2::AccessToken.stub(:new) {@access_token}
+    OAuth2::AccessToken.stub(:new) { @access_token }
   end
 
   before(:each) do
@@ -54,7 +54,9 @@ describe SessionsController, '#create' do
     user = stub(:user).as_null_object
     User.stub(:find_by_email) {user}
 
-    user.should_receive(:update_attributes).with(admin_of: ['https://www.cobot.me/api/spaces/co-up'])
+    user.should_receive(:update_attributes).with(
+      hash_including(admin_of: ['https://www.cobot.me/api/spaces/co-up'],
+        oauth_token: '12345'))
 
     get :create, provider: 'cobot'
   end

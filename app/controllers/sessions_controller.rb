@@ -40,14 +40,20 @@ class SessionsController < ApplicationController
   def create_or_update_user(auth)
     unless @user
       if @user = User.find_by_email(auth['user_info']['email'])
-        @user.update_attributes admin_of: auth['extra']['user_hash']['admin_of'].map{|hash| hash['space_link']}
+        @user.update_attributes user_attributes(auth)
       else
-        @user = User.create email: auth['user_info']['email'],
-          oauth_token: auth['credentials']['token'],
-          admin_of: auth['extra']['user_hash']['admin_of'].map{|hash| hash['space_link']}
+        @user = User.create user_attributes(auth)
       end
     end
     @user
+  end
+
+  def user_attributes(auth)
+    {
+      email: auth['user_info']['email'],
+      oauth_token: auth['credentials']['token'],
+      admin_of: auth['extra']['user_hash']['admin_of'].map {|hash| hash['space_link'] }
+    }
   end
 
   def cobot_client
