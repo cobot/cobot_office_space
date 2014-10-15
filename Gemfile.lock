@@ -183,6 +183,8 @@ GEM
       rdoc (~> 3.4)
       thor (~> 0.14.6)
     rake (10.0.3)
+    raven (1.2.4)
+      rake (>= 0.7)
     rdoc (3.12)
       json (~> 1.4)
     responders (0.6.4)
@@ -259,6 +261,7 @@ DEPENDENCIES
   puma
   rails (~> 3.1.10)
   rails_12factor
+  raven
   rspec-rails
   sass-rails (~> 3.1.0)
   simple_form
