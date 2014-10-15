@@ -13,7 +13,7 @@ class Space < ActiveRecord::Base
   end
 
   def members
-    cobot_client(User.where(email: admins).first.oauth_token)
+    cobot_client(User.where(email: admins).map(&:oauth_token).compact.first)
       .get(subdomain, '/memberships', attributes: 'id,name')
       .map {|atts| Member.new(atts) }
   end
