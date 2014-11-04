@@ -1,11 +1,12 @@
 Given /^I am logged in$/ do
+    OmniAuth.config.test_mode = true
     OmniAuth.config.mock_auth[:cobot] ||= {
     "credentials"=>{"token"=>"12345"},
-    "user_info"=>{"name"=>"janesmith", 
-        "email"=>"janesmith@example.com"}, 
+    "user_info"=>{"name"=>"janesmith",
+        "email"=>"janesmith@example.com"},
     "extra"=>{
       "user_hash"=>{
-        "memberships"=>[], 
+        "memberships"=>[],
         "admin_of"=>[]
       }
     }

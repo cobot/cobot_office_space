@@ -2,9 +2,9 @@ source 'http://rubygems.org'
 
 ruby '2.1.2'
 
-gem 'rails', '~>3.1.10'
+gem 'rails', '~>3.2.20'
 gem 'pg'
-gem 'omniauth', git: 'git://github.com/intridea/omniauth.git'
+gem 'omniauth_cobot'
 gem 'simple_form'
 gem 'inherited_resources'
 gem 'cobot_client'
@@ -14,7 +14,7 @@ gem 'sentry-raven'
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
-  gem 'sass-rails', "~> 3.1.0"
+  gem 'sass-rails', "~> 3.2.0"
   gem 'uglifier'
 end
 

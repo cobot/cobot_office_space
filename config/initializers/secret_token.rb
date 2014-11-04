@@ -4,4 +4,8 @@
 # If you change this key, all old signed cookies will become invalid!
 # Make sure the secret is at least 30 characters and all random,
 # no regular words or you'll be exposed to dictionary attacks.
-OfficeSpace::Application.config.secret_token = ENV['SECRET_TOKEN']
+if Rails.env.production?
+  OfficeSpace::Application.config.secret_token = ENV['SECRET_TOKEN']
+else
+  OfficeSpace::Application.config.secret_token = '2d376b8264f0bf689b9b803e7ac8add5f2d376b8264f0bf689b9b803e7ac8add5f2d376b8264f0bf689b9b803e7ac8add5f2d376b8264f0bf689b9b803e7ac8add5f2d376b8264f0bf689b9b803e7ac8add5f'
+end
