@@ -9,8 +9,8 @@ class SessionsController < ApplicationController
     auth = request.env['omniauth.auth']
     user = create_or_update_user(auth)
     session[:user_id] = user.id
-    auth['extra']['user_hash']['admin_of'].each do |hash|
-      space = create_or_update_space(hash['space_link'], auth['user_info']['email'])
+    auth['extra']['raw_info']['admin_of'].each do |hash|
+      space = create_or_update_space(hash['space_link'], auth['info']['email'])
     end
     redirect_to spaces_path
   end
@@ -39,7 +39,7 @@ class SessionsController < ApplicationController
 
   def create_or_update_user(auth)
     unless @user
-      if @user = User.find_by_email(auth['user_info']['email'])
+      if @user = User.find_by_email(auth['info']['email'])
         @user.update_attributes user_attributes(auth)
       else
         @user = User.create user_attributes(auth)
@@ -50,9 +50,9 @@ class SessionsController < ApplicationController
 
   def user_attributes(auth)
     {
-      email: auth['user_info']['email'],
+      email: auth['info']['email'],
       oauth_token: auth['credentials']['token'],
-      admin_of: auth['extra']['user_hash']['admin_of'].map {|hash| hash['space_link'] }
+      admin_of: auth['extra']['raw_info']['admin_of'].map {|hash| hash['space_link'] }
     }
   end
 

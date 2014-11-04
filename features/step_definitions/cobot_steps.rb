@@ -5,10 +5,10 @@ Given /^on cobot I have a space "([^\"]*)"$/ do |space_name|
     "provider"=>"cobot",
     "uid"=>"janesmith",
     "credentials"=>{"token"=>"12345"},
-    "user_info"=> {
-        "email"=>"janesmith@example.com"},
+    "info"=> {
+      "email"=>"janesmith@example.com"},
     "extra"=> {
-      "user_hash"=> {
+      "raw_info"=> {
         "email"=>"janesmith@example.com",
         "id"=>"123456",
         "memberships"=>[],

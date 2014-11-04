@@ -24,9 +24,9 @@ describe SessionsController, '#create' do
   before(:each) do
     request.env['omniauth.auth'] = {
       "credentials"=>{"token"=>"12345"},
-      'user_info' => {'email' => 'joe@doe.com'},
+      'info' => {'email' => 'joe@doe.com'},
       "extra"=>{
-        "user_hash"=>{
+        "raw_info"=>{
           "admin_of"=>[
             {"space_link"=>"https://www.cobot.me/api/spaces/co-up"}
           ]

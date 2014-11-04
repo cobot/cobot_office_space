@@ -21,10 +21,10 @@ CSV
   def log_in(user, space)
     OmniAuth.config.mock_auth[:cobot] = {
       "credentials"=>{"token"=>"12345"},
-      "user_info"=>{"name"=>"janesmith",
-          "email"=>"janesmith@example.com"},
+      "info"=>{"name"=>"janesmith",
+        "email"=>"janesmith@example.com"},
       "extra"=>{
-        "user_hash"=>{
+        "raw_info"=>{
           "memberships"=>[],
           "admin_of"=>[
             {"space_link" => space.url}
