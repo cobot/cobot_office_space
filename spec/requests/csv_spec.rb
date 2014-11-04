@@ -2,10 +2,13 @@ require 'spec_helper'
 
 describe 'download resources as csv' do
   it 'returns all the resources' do
+    WebMock.stub_request(:get, "https://co-up.cobot.me/api/memberships?attributes=id,name").
+      to_return(body: [{id: '1', name: 'Joe'}].to_json)
+
     user = User.create!
     space = Space.create! url: 'http://www.cobot.me/api/spaces/co-up'
     category = space.categories.create! name: 'Small Office'
-    category.resources.create! name: 'Office 1', member_name: 'Joe', member_cobot_id: '1'
+    category.resources.create! name: 'Office 1', member_cobot_id: '1'
     category.resources.create! name: 'Office 2'
     log_in user, space
 

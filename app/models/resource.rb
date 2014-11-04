@@ -11,7 +11,7 @@ class Resource < ActiveRecord::Base
 
   def set_member_name
     if member_cobot_id?
-      self.member_name ||= space.members
+      self.member_name = space.members
         .find {|m| m.id == member_cobot_id }.name
     else
       self.member_name = nil
