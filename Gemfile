@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-ruby '2.1.2'
+ruby '2.2.2'
 
 gem 'rails', '~>3.2.20'
 gem 'pg'
@@ -14,7 +14,7 @@ gem 'sentry-raven'
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
-  gem 'sass-rails', "~> 3.2.0"
+  gem 'sass-rails', '~> 3.2.0'
   gem 'uglifier'
 end
 
@@ -40,4 +40,5 @@ group :test do
   gem 'capybara'
   gem 'webmock'
   gem 'launchy'
+  gem 'test-unit'
 end
