@@ -1,0 +1,10 @@
+<ul>
+  <% resources.each do |resource| %>
+    <li>
+      <%= link_to resource.name, [space, category, resource] %>
+      <% if resource.member_name? %>
+        – <%= resource.member_name %>
+      <% end %>
+    </li>
+  <% end %>
+</ul>

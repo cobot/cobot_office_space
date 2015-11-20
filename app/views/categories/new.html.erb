@@ -1,9 +1,31 @@
-<h1><%= link_to @space.name, @space %> / Add Category</h1>
+<div class="cb-section">
+  <div class="cb-container">
+    <h1><%= link_to @space.name, @space %> / Add Category</h1>
+  </div>
+</div>
 
-<%= simple_form_for [@space, @category] do |f| %>
-  <%= f.input :name %>
-  <%= f.input :no_of_resources, label: 'No. of resources' %>
-  <%= f.submit 'Add Category' %>
-<% end %>
-
-<p><%= link_to 'back', @space %></p>
+<div class="cb-section">
+  <div class="cb-container">
+    <div class="grid grid--gutters--huge grid--full tablet-grid--1of2">
+      <div class="grid-cell">
+        <div class="form-block form-block--wide">
+          <%= form_for [@space, @category] do |f| %>
+            <p>
+              <%= f.label :name %>
+              <%= f.text_field :name, required: true, class: 'input--stretch' %>
+            </p>
+            <p>
+              <%= f.label :no_of_resources, 'No. of resources' %>
+              <%= f.text_field :no_of_resources, type: :number, min: 1, step: 1,
+                required: true, class: 'input--stretch' %>
+            </p>
+            <p>
+              <%= f.submit 'Add Category', class: 'btn btn--blue btn--full' %>
+            </p>
+          <% end %>
+          <p><%= link_to 'back', @space %></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

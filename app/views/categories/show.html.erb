@@ -1,21 +1,27 @@
-<h1><%= link_to @space.name, @space %> / <%= @category.name %></h1>
+<div class="cb-section">
+  <div class="cb-container">
+    <h1><%= link_to @space.name, @space %> / <%= @category.name %></h1>
+  </div>
+</div>
 
-<p>
-  <%= link_to 'Remove Category', [@space, @category], method: :delete, confirm: 'Really remove this category?' %>,
-  <%= link_to 'Add Resource', [:new, @space, @category, :resource] %>
-</p>
+<div class="cb-section">
+  <div class="cb-container">
+    <p>
+      <%= link_to 'Remove Category', [@space, @category], method: :delete, confirm: 'Really remove this category?',
+        class: 'btn' %>
+      <%= link_to 'Add Resource', [:new, @space, @category, :resource], class: 'btn btn--blue' %>
+    </p>
 
-<p><%= @category.resources.reject(&:member_id?).size %> out of <%= @category.resources.size %> resources free.</p>
+    <p><%= @category.resources.reject(&:member_name?).size %> out of <%= @category.resources.size %> resources free.</p>
 
-<ul>
-  <% @category.resources.each do |resource| %>
-    <li>
-      <%= link_to resource.name, [@space, @category, resource] %>
-      <% if resource.member_name? %>
-        (<%= resource.member_name %>)
+    <div class="grid grid--full tablet-grid--1of2">
+      <% 2.times do |n| %>
+        <div class="grid-cell">
+          <%= render 'resources', resources: @category.resources.in_groups(2, false)[n],
+            space: @space, category: @category %>
+        </div>
       <% end %>
-    </li>
-  <% end %>
-</ul>
-
-<p><%= link_to 'back', [@space] %></p>
+    </div>
+    <p><%= link_to 'back', [@space] %></p>
+  </div>
+</div>

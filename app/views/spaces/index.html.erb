@@ -1,3 +1,19 @@
-<h1>No Spaces</h1>
+<div class="cb-section">
+  <div class="cb-container">
+    <h1>Select a Space</h1>
+  </div>
+</div>
 
-<p>You do not administer any spaces on cobot. There's nothing for you to do here.</p>
+<div class="cb-section">
+  <div class="cb-container">
+    <% if @space_names.empty? %>
+      <p>You do not manage any spaces on cobot. There's nothing for you to do here.</p>
+    <% else %>
+      <ul>
+        <% @space_names.each do |space| %>
+          <li><%= link_to space, space_path(space) %></li>
+        <% end %>
+      </ul>
+    <% end %>
+  </div>
+</div>

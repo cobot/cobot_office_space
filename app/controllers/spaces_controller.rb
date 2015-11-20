@@ -2,8 +2,9 @@ require 'csv'
 
 class SpacesController < ApplicationController
   def index
-    if space = current_user.admin_of_space_names.first
-      redirect_to space_path(space)
+    @space_names = current_user.admin_of_space_names
+    if @space_names.size == 1
+      redirect_to space_path(@space_names.first)
     end
   end
 

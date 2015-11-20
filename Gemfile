@@ -10,6 +10,7 @@ gem 'inherited_resources'
 gem 'cobot_client'
 gem 'virtus'
 gem 'sentry-raven'
+gem 'cobot_assets'
 
 # Gems used only for assets and not required
 # in production environments by default.

@@ -1,12 +1,32 @@
-<h1><%= link_to @space.name, @space %> / <%= link_to @category.name, [@space, @category] %> / New Resource</h1>
+<div class="cb-section">
+  <div class="cb-container">
+    <h1><%= link_to @space.name, @space %> / <%= link_to @category.name, [@space, @category] %> / New Resource</h1>
+  </div
+</div>
 
-<%= simple_form_for [@space, @category, @resource] do |f| %>
-  <%= f.input :name %>
-  <div class="input select optional">
-    <%= f.label :member_cobot_id, 'Member' %>
-    <%= f.select :member_cobot_id, @space.members.map {|m| [m.name, m.id] } %>
+
+<div class="cb-section">
+  <div class="cb-container">
+    <div class="grid grid--full tablet-grid--1of2">
+      <div class="grid-cell">
+        <div class="form-block form-block--wide">
+          <%= form_for [@space, @category, @resource] do |f| %>
+            <p>
+              <%= f.label :name %>
+              <%= f.text_field :name, class: 'input--stretch', required: true %>
+            </p>
+            <p>
+              <%= f.label :member_cobot_id, 'Member' %>
+              <%= f.select :member_cobot_id, @space.members.map {|m| [m.name, m.id] },
+                {required: true}, class: 'input--stretch'%>
+            </p>
+            <p>
+              <%= f.submit 'Add Resource', class: 'btn btn--blue btn--full' %>
+            </p>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <p><%= link_to 'back', [@space, @category] %></p>
   </div>
-  <%= f.submit 'Add Resource' %>
-<% end %>
-
-<p><%= link_to 'back', [@space, @category] %></p>
+</div>
