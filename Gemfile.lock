@@ -184,9 +184,6 @@ GEM
       faraday (>= 0.7.6)
       hashie (>= 1.1.0)
       uuidtools
-    simple_form (1.4.2)
-      actionpack (~> 3.0)
-      activemodel (~> 3.0)
     sprockets (2.2.3)
       hike (~> 1.2)
       multi_json (~> 1.0)
@@ -240,7 +237,6 @@ DEPENDENCIES
   rspec-rails
   sass-rails (~> 3.2.0)
   sentry-raven
-  simple_form
   test-unit
   turn
   uglifier
