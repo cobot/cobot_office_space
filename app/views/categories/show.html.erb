@@ -3,7 +3,9 @@
 <p>
   <%= link_to 'Remove Category', [@space, @category], method: :delete, confirm: 'Really remove this category?' %>,
   <%= link_to 'Add Resource', [:new, @space, @category, :resource] %>
- </p>
+</p>
+
+<p><%= @category.resources.reject(&:member_id?).size %> out of <%= @category.resources.size %> resources free.</p>
 
 <ul>
   <% @category.resources.each do |resource| %>
