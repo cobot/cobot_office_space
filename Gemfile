@@ -24,6 +24,7 @@ group :production do
 end
 
 gem 'jquery-rails'
+gem 'test-unit'
 
 # Use unicorn as the web server
 # gem 'unicorn'
@@ -40,5 +41,4 @@ group :test do
   gem 'capybara'
   gem 'webmock'
   gem 'launchy'
-  gem 'test-unit'
 end
