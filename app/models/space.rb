@@ -13,9 +13,19 @@ class Space < ActiveRecord::Base
   end
 
   def members
-    cobot_client(User.where(email: admins).map(&:oauth_token).compact.first)
-      .get(subdomain, '/memberships', attributes: 'id,name')
-      .map {|atts| Member.new(atts) }
+    admin_users =  User.where(email: admins)
+    begin
+      cobot_client(admin_users.shift.oauth_token)
+        .get(subdomain, '/memberships', attributes: 'id,name')
+        .map {|atts| Member.new(atts) }
+      rescue RestClient::Forbidden => e
+        if admin_users.empty?
+          raise e
+        else
+          update_attribute(:admins, admin_users.map(&:email))
+          retry
+        end
+    end
   end
 
   private
