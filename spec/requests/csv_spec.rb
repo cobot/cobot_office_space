@@ -14,7 +14,7 @@ describe 'download resources as csv' do
 
     get space_path(space, format: :csv)
 
-    response.body.should == <<-CSV
+    expect(response.body).to eq <<-CSV
 Resource|Category|Member
 Office 1|Small Office|Joe
 Office 2|Small Office|

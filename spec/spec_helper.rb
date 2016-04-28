@@ -30,9 +30,20 @@ RSpec.configure do |config|
     WebMock.disable_net_connect!
   end
 
-  def log_in(user = stub('user'))
-    user.stub(:id) {1} unless user.respond_to?(:id)
+  def log_in(user = double('user'))
+    allow(user).to receive(:id) {1} unless user.respond_to?(:id)
     session[:user_id] = user.id
-    User.stub(:find_by_id).with(user.id) {user}
+    allow(User).to receive(:find_by_id).with(user.id) {user}
   end
+
+  # rspec-rails 3 will no longer automatically infer an example group's spec type
+  # from the file location. You can explicitly opt-in to the feature using this
+  # config option.
+  # To explicitly tag specs without using automatic inference, set the `:type`
+  # metadata manually:
+  #
+  #     describe ThingsController, :type => :controller do
+  #       # Equivalent to being in spec/controllers
+  #     end
+  config.infer_spec_type_from_file_location!
 end
