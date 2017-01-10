@@ -9,5 +9,5 @@ end
 Then /^I should see that "([^"]*)" is assigned to "([^"]*)"$/ do |member_name, resource_name|
   visit spaces_path
   click_link resource_name.sub(/\s\d+$/, '')
-  page.should have_xpath("//*[contains(., '#{member_name}')][contains(., '#{resource_name}')]")
+  expect(page).to have_xpath("//*[contains(., '#{member_name}')][contains(., '#{resource_name}')]")
 end

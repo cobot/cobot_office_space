@@ -1,7 +1,7 @@
 class Space < ActiveRecord::Base
   before_create :set_name
   has_many :categories, dependent: :destroy
-  has_many :resources, through: :categories, order: 'name'
+  has_many :resources, through: :categories
   serialize :admins
 
   def to_param
@@ -15,7 +15,7 @@ class Space < ActiveRecord::Base
   def members
     admin_users = User.where(email: admins)
     begin
-      cobot_client(admin_users.shift.oauth_token)
+      cobot_client(admin_users.to_a.shift.oauth_token)
         .get(subdomain, '/memberships', attributes: 'id,name')
         .map {|atts| Member.new(atts) }
     rescue RestClient::Forbidden => e

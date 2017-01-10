@@ -21,5 +21,5 @@ end
 
 Then /^I should see no category "([^"]*)"$/ do |name|
   visit spaces_path
-  page.should have_no_css('*', text: name)
+  expect(page).to have_no_css('*', text: name)
 end

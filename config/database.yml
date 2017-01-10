@@ -11,6 +11,14 @@ development:
   timeout: 5000
   port: 5432
   host: 127.0.0.1
+production:
+  adapter: postgresql
+  encoding: unicode
+  database: office_space_development
+  pool: 5
+  timeout: 5000
+  port: 5432
+  host: 127.0.0.1
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".

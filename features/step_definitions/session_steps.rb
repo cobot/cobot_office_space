@@ -17,5 +17,5 @@ Given /^I am logged in$/ do
 end
 
 Then /^I should be signed out$/ do
-  page.should have_no_css('*', text: 'Sign out')
+  expect(page).to have_no_css('*', text: 'Sign out')
 end

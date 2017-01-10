@@ -7,17 +7,16 @@ describe CategoriesController, 'create', type: :controller do
   end
 
   it 'creates the requested no. of resources' do
-    space = double(:space, class: Space, to_param: 'co-up', admin?: true)
+    space = double(:space, class: Space, to_param: 'co-up', admin?: true).as_null_object
     category = double(:category, name: 'Small Office', no_of_resources: '2',
-      resources: double(:resources), save: true, errors: {}, class: Category,
-      to_param: '1')
-    allow(space).to receive_message_chain(:categories, :build) { category }
+      resources: double(:resources), valid?: true, to_param: '1').as_null_object
+    allow(space).to receive_message_chain(:categories, :create) { category }
     allow(Space).to receive(:find_by_name!) { space }
 
     expect(category.resources).to receive(:create).with(name: 'Small Office 01')
     expect(category.resources).to receive(:create).with(name: 'Small Office 02')
 
-    post :create, space_id: 'co-up'
+    post :create, space_id: 'co-up', category: {no_of_resources: 2}
   end
 
   it 'renders 403 if the user is not admin of the space' do

@@ -2,7 +2,7 @@
   <div class="cb-container">
     <h1><%= @category.name %></h1>
     <p class="f--right">
-      <%= link_to 'Remove Category', [@space, @category], method: :delete, confirm: 'Really remove this category?',
+      <%= link_to 'Remove Category', [@space, @category], method: :delete, data: {confirm: 'Really remove this category?'},
         class: 'btn btn--admin-header btn--full btn--primary' %>
       <%= link_to 'Add Resource', [:new, @space, @category, :resource], class: 'btn btn--admin-header btn--full btn--primary' %>
     </p>

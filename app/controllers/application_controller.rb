@@ -3,8 +3,13 @@ class ApplicationController < ActionController::Base
   helper_method :current_user
 
   before_filter :authenticate
+  after_action :remove_x_frame_options
 
   private
+
+  def remove_x_frame_options
+    response.headers.except! 'X-Frame-Options'
+  end
 
   def current_user
     @current_user ||= User.find_by_id(session[:user_id]) if session[:user_id]

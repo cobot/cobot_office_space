@@ -1,27 +1,21 @@
 source 'http://rubygems.org'
 
-ruby '2.2.2'
+ruby '2.3.3'
 
-gem 'rails', '~>3.2.20'
+gem 'rails', '~>4.2.7.1'
 gem 'pg'
 gem 'omniauth_cobot'
-gem 'inherited_resources'
 gem 'cobot_client'
 gem 'virtus'
 gem 'sentry-raven'
 gem 'cobot_assets', '~>0.10.0'
 gem 'font-awesome-sass'
-
-# Gems used only for assets and not required
-# in production environments by default.
-group :assets do
-  gem 'sass-rails', '~> 3.2.0'
-  gem 'uglifier'
-end
+gem 'sass-rails'
+gem 'puma'
 
 group :production do
   gem 'rails_12factor'
-  gem 'puma'
+  gem 'uglifier'
 end
 
 gem 'jquery-rails'
@@ -37,8 +31,8 @@ end
 
 group :test do
   gem 'database_cleaner'
-  gem 'turn', require: false
   gem 'cucumber-rails', require: false
+  gem 'rspec-rails'
   gem 'capybara'
   gem 'webmock'
   gem 'launchy'
