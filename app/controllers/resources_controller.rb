@@ -2,6 +2,7 @@ class ResourcesController < ApplicationController
   inherit_resources
   before_filter :load_space
   belongs_to :category
+  layout 'embed'
 
   def update
     super { space_category_path(@space, @category) }

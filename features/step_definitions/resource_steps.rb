@@ -14,7 +14,7 @@ When /^I add the resource "([^"]*)"$/ do |name|
 end
 
 Then /^I should see a category "([^"]*)" with the resources "([^"]*)"$/ do |name, offices|
-  click_link 'Home'
+  visit space_path(Space.last)
   click_link name
   offices.split('/').each do |office|
     page.should have_css('*', text: office)
@@ -22,7 +22,7 @@ Then /^I should see a category "([^"]*)" with the resources "([^"]*)"$/ do |name
 end
 
 Then /^I should see that the category "([^"]*)" has no resource "([^"]*)"$/ do |category_name, resource_name|
-  click_link 'Home'
+  visit space_path(Space.last)
   click_link category_name
   page.should have_no_css('*', text: resource_name)
 end

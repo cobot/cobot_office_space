@@ -1,6 +1,8 @@
 require 'csv'
 
 class SpacesController < ApplicationController
+  layout 'embed', except: :index
+
   def index
     @space_names = current_user.admin_of_space_names
     if @space_names.size == 1
@@ -12,7 +14,17 @@ class SpacesController < ApplicationController
     @space = Space.find_by_name!(params[:id])
     check_permission @space do
       respond_to do |format|
-        format.html
+        format.html do
+          if params[:cobot_embed]
+            session[:cobot_embed] = true
+          elsif !session[:cobot_embed]
+            client = CobotClient::ApiClient.new current_user.oauth_token
+            links = CobotClient::NavigationLinkService.new(client, @space.subdomain).install_links [
+              CobotClient::NavigationLink.new(section: 'admin/manage',
+                label: 'Inventory', iframe_url: request.url)]
+            redirect_to links.first.user_url
+          end
+        end
         format.csv do
           render text: space_csv(@space), content_type: 'text/csv'
         end

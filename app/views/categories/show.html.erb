@@ -1,15 +1,10 @@
 <div class="cb-section">
   <div class="cb-container">
-    <h1><%= link_to @space.name, @space %> / <%= @category.name %></h1>
-  </div>
-</div>
-
-<div class="cb-section">
-  <div class="cb-container">
-    <p>
+    <h1><%= @category.name %></h1>
+    <p class="f--right">
       <%= link_to 'Remove Category', [@space, @category], method: :delete, confirm: 'Really remove this category?',
-        class: 'btn' %>
-      <%= link_to 'Add Resource', [:new, @space, @category, :resource], class: 'btn btn--blue' %>
+        class: 'btn btn--admin-header btn--full btn--primary' %>
+      <%= link_to 'Add Resource', [:new, @space, @category, :resource], class: 'btn btn--admin-header btn--full btn--primary' %>
     </p>
 
     <p><%= @category.resources.reject(&:member_name?).size %> out of <%= @category.resources.size %> resources free.</p>

@@ -1,14 +1,9 @@
 <div class="cb-section">
   <div class="cb-container">
-    <h1><%= @space.name %></h1>
-  </div>
-</div>
-
-<div class="cb-section">
-  <div class="cb-container">
-    <p>
-      <%= link_to 'Add Category', new_space_category_path(@space), class: 'btn' %>
-      <%= link_to 'Download CSV', space_path(@space, format: :csv), class: 'btn' %>
+    <h1>Inventory</h1>
+    <p class="f--right">
+      <%= link_to 'Add Category', new_space_category_path(@space), class: 'btn btn--admin-header btn--full btn--primary' %>
+      <%= link_to 'Download CSV', space_path(@space, format: :csv), class: 'btn btn--admin-header btn--full btn--primary' %>
     </p>
 
     <ul>

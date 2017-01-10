@@ -1,7 +1,8 @@
 class CategoriesController < ApplicationController
   inherit_resources
-  belongs_to :space, :finder => :find_by_name!
+  belongs_to :space, finder: :find_by_name!
   before_filter :check_permission_filter
+  layout 'embed'
 
   def create
     super do |success, failure|

@@ -28,11 +28,11 @@ class Space < ActiveRecord::Base
     end
   end
 
-  private
-
   def subdomain
     name
   end
+
+  private
 
   def cobot_client(access_token)
     CobotClient::ApiClient.new access_token
