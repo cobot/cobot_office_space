@@ -188,7 +188,7 @@ GEM
       rspec-support (~> 3.4.0)
     rspec-support (3.4.1)
     safe_yaml (1.0.4)
-    sass (3.4.7)
+    sass (3.2.19)
     sass-rails (3.2.6)
       railties (~> 3.2.0)
       sass (>= 3.1.10)
@@ -252,6 +252,7 @@ DEPENDENCIES
   rails (~> 3.2.20)
   rails_12factor
   rspec-rails
+  sass (~> 3.2.5)
   sass-rails (~> 3.2.0)
   sentry-raven
   test-unit
