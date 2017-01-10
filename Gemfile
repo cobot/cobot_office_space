@@ -11,7 +11,6 @@ gem 'virtus'
 gem 'sentry-raven'
 gem 'cobot_assets', '~>0.10.0'
 gem 'font-awesome-sass'
-gem 'sass', '~> 3.2.5'
 
 # Gems used only for assets and not required
 # in production environments by default.
