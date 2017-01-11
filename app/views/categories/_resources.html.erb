@@ -3,7 +3,9 @@
     <li>
       <%= link_to resource.name, [space, category, resource] %>
       <% if resource.member_name? %>
-        – <%= resource.member_name %>
+        – <%= link_to resource.member_name,
+          "https://#{space.subdomain}.cobot.me/admin/memberships/#{resource.member_cobot_id}",
+          target: '_top' %>
       <% end %>
     </li>
   <% end %>
