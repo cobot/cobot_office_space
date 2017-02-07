@@ -16,9 +16,7 @@ class ApplicationController < ActionController::Base
   end
 
   def authenticate
-    unless current_user
-      redirect_to root_path, notice: "Please sign in"
-    end
+    redirect_to '/auth/cobot' unless current_user
   end
 
   def check_permission(space)
@@ -28,5 +26,4 @@ class ApplicationController < ActionController::Base
       render file: 'public/403.html', status: 403, layout: false
     end
   end
-
 end
