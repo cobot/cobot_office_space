@@ -16,7 +16,10 @@ class ApplicationController < ActionController::Base
   end
 
   def authenticate
-    redirect_to '/auth/cobot' unless current_user
+    unless current_user
+      session[:return_to] = request.url
+      redirect_to '/auth/cobot'
+    end
   end
 
   def check_permission(space)

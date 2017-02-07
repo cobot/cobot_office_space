@@ -12,7 +12,7 @@ class SessionsController < ApplicationController
     auth['extra']['raw_info']['admin_of'].each do |hash|
       space = create_or_update_space(hash['space_link'], auth['info']['email'])
     end
-    redirect_to spaces_path
+    redirect_to session[:return_to] || spaces_path
   end
 
   def failure
