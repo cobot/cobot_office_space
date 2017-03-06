@@ -12,7 +12,7 @@
     <div class="grid grid--full tablet-grid--1of2">
       <% 2.times do |n| %>
         <div class="grid-cell">
-          <%= render 'resources', resources: @category.resources.in_groups(2, false)[n],
+          <%= render 'resources', resources: @category.resources.order(:name).in_groups(2, false)[n],
             space: @space, category: @category %>
         </div>
       <% end %>
