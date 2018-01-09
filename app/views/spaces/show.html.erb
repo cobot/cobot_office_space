@@ -7,7 +7,7 @@
     </p>
 
     <ul>
-      <% @space.categories(order: 'name ASC').each do |category| %>
+      <% @space.categories.order('name ASC').each do |category| %>
         <li><%= link_to category.name, [@space, category] %></li>
       <% end %>
     </ul>
