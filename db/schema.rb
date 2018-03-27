@@ -18,23 +18,23 @@ ActiveRecord::Schema.define(version: 20170111174713) do
 
   create_table "categories", force: :cascade do |t|
     t.integer "space_id"
-    t.string  "name",     limit: 255
+    t.string  "name"
   end
 
   create_table "resources", force: :cascade do |t|
     t.integer "category_id"
     t.integer "member_id"
-    t.string  "name",            limit: 255
-    t.string  "member_cobot_id", limit: 255
-    t.string  "member_name",     limit: 255
+    t.string  "name"
+    t.string  "member_cobot_id"
+    t.string  "member_name"
   end
 
   add_index "resources", ["category_id"], name: "index_resources_on_category_id", using: :btree
   add_index "resources", ["member_id"], name: "index_resources_on_member_id", using: :btree
 
   create_table "spaces", force: :cascade do |t|
-    t.string "url",    limit: 255
-    t.string "name",   limit: 255
+    t.string "url"
+    t.string "name"
     t.text   "admins"
   end
 
@@ -42,8 +42,8 @@ ActiveRecord::Schema.define(version: 20170111174713) do
   add_index "spaces", ["url"], name: "index_spaces_on_url", using: :btree
 
   create_table "users", force: :cascade do |t|
-    t.string "email",       limit: 255
-    t.string "oauth_token", limit: 255
+    t.string "email"
+    t.string "oauth_token"
     t.text   "admin_of"
   end
 
