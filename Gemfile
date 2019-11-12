@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-ruby '2.3.6'
+ruby '2.4.9'
 
 gem 'rails', '~>4.2.11'
 gem 'pg'
@@ -24,15 +24,15 @@ gem 'test-unit'
 # Use unicorn as the web server
 # gem 'unicorn'
 
+gem 'rspec-rails', group: [:test, :development]
+
 group :development do
-  gem 'rspec-rails'
   gem 'dotenv-rails'
 end
 
 group :test do
   gem 'database_cleaner'
   gem 'cucumber-rails', require: false
-  gem 'rspec-rails'
   gem 'capybara'
   gem 'webmock'
   gem 'launchy'
