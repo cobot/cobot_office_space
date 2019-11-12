@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-ruby '~>2.4.9'
+ruby '~>2.4.6'
 
 gem 'rails', '~>4.2.11'
 gem 'pg'
