@@ -12,6 +12,7 @@ gem 'cobot_assets', '~>0.10.0'
 gem 'font-awesome-sass'
 gem 'sass-rails'
 gem 'puma'
+gem 'rails_same_site_cookie'
 
 group :production do
   gem 'rails_12factor'
