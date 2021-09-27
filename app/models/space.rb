@@ -18,7 +18,7 @@ class Space < ActiveRecord::Base
       cobot_client(admin_users.to_a.shift.oauth_token)
         .get(subdomain, '/memberships', attributes: 'id,name')
         .map {|atts| Member.new(atts) }
-    rescue RestClient::Forbidden => e
+    rescue RestClient::Forbidden, RestClient::Unauthorized => e
       if admin_users.empty?
         raise e
       else

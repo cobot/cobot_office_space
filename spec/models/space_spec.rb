@@ -24,7 +24,28 @@ describe Space, 'members' do
 
     # fake the users we load in the space from admin emails
     allow(User).to receive_messages(where: [
-      User.new(oauth_token: 'auth_1', email: 'joe@doe.com'), 
+      User.new(oauth_token: 'auth_1', email: 'joe@doe.com'),
+      User.new(oauth_token: 'auth_2', email: 'jane@doe.com')
+    ])
+
+    space = Space.new(url: "/co-up", name: 'co-up', admins: ['joe@doe.com', 'jane@doe.com'])
+    space.members
+    expect(WebMock).to have_requested(:get, 'https://co-up.cobot.me/api/memberships?attributes=id,name')
+      .with(headers: {'Authorization' => "Bearer auth_1"})
+    expect(WebMock).to have_requested(:get, 'https://co-up.cobot.me/api/memberships?attributes=id,name')
+      .with(headers: {'Authorization' => "Bearer auth_2"})
+
+    expect(space.admins).to eq(['jane@doe.com'])
+  end
+
+  it 'retries with other access token when one access token is not authorized and remove the email' do
+    WebMock.stub_request(:get, 'https://co-up.cobot.me/api/memberships?attributes=id,name')
+      .to_return(status: [401, 'Unauthorized'])
+      .to_return(body: [{ id: '1', name: 'Joe' }].to_json)
+
+    # fake the users we load in the space from admin emails
+    allow(User).to receive_messages(where: [
+      User.new(oauth_token: 'auth_1', email: 'joe@doe.com'),
       User.new(oauth_token: 'auth_2', email: 'jane@doe.com')
     ])
 
