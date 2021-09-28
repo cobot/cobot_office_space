@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'download resources as csv' do
+RSpec.describe 'download resources as csv', type: :request do
   it 'returns all the resources' do
     WebMock.stub_request(:get, "https://co-up.cobot.me/api/memberships?attributes=id,name").
       to_return(body: [{id: '1', name: 'Joe'}].to_json)
@@ -12,7 +12,7 @@ describe 'download resources as csv' do
     category.resources.create! name: 'Office 2'
     log_in user, space
 
-    get space_path(space, format: :csv)
+    get space_path(space), params: {format: :csv }
 
     expect(response.body).to eq <<-CSV
 Resource|Category|Member
@@ -39,6 +39,6 @@ CSV
       body: [].to_json,
     )
 
-    get authenticate_path(provider: 'cobot')
+    get authenticate_path('cobot')
   end
 end

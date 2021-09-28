@@ -16,14 +16,14 @@ describe CategoriesController, 'create', type: :controller do
     expect(category.resources).to receive(:create).with(name: 'Small Office 01')
     expect(category.resources).to receive(:create).with(name: 'Small Office 02')
 
-    post :create, space_id: 'co-up', category: {no_of_resources: 2}
+    post :create, params: { space_id: 'co-up', category: { no_of_resources: 2 } }
   end
 
   it 'renders 403 if the user is not admin of the space' do
     space = double(:space, admin?: false)
     allow(Space).to receive(:find_by_name!) { space }
 
-    post :create, space_id: 'co-up'
+    post :create, params: { space_id: 'co-up' }
 
     expect(response.status).to eq(403)
   end

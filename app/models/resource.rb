@@ -1,4 +1,4 @@
-class Resource < ActiveRecord::Base
+class Resource < ApplicationRecord
   belongs_to :category
 
   before_save :set_member_name

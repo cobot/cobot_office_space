@@ -2,7 +2,7 @@ source 'http://rubygems.org'
 
 ruby '~>2.4.6'
 
-gem 'rails', '~>4.2.11'
+gem 'rails', '~>5.0.0'
 gem 'pg'
 gem 'omniauth_cobot'
 gem 'cobot_client'
@@ -37,4 +37,5 @@ group :test do
   gem 'capybara'
   gem 'webmock'
   gem 'launchy'
+  gem 'rails-controller-testing'
 end

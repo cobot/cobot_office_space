@@ -1,4 +1,4 @@
-class Category < ActiveRecord::Base
+class Category < ApplicationRecord
   belongs_to :space
   has_many :resources, dependent: :destroy
 

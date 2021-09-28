@@ -8,7 +8,7 @@ describe ResourcesController, 'permissions', type: :controller do
     allow(space).to receive(:admin?).with(user) {false}
     allow(Space).to receive(:find_by_name!) {space}
 
-    post :create, space_id: '1', category_id: '2'
+    post :create, params: { space_id: '1', category_id: '2' }
 
     expect(response.status).to eq(403)
   end
