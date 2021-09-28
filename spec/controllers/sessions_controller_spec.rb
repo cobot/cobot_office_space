@@ -38,7 +38,7 @@ describe SessionsController, '#create', type: :controller do
   it 'tries to find the user' do
     expect(User).to receive(:find_by_email).with('joe@doe.com')
 
-    get :create, provider: 'cobot'
+    get :create, params: { provider: 'cobot' }
   end
 
   it 'creates a user if none found' do
@@ -47,7 +47,7 @@ describe SessionsController, '#create', type: :controller do
     expect(User).to receive(:create).with(email: 'joe@doe.com',
       oauth_token: '12345', admin_of: ['https://www.cobot.me/api/spaces/co-up'])
 
-    get :create, provider: 'cobot'
+    get :create, params: { provider: 'cobot' }
   end
 
   it 'updates an existing user if one found' do
@@ -58,7 +58,7 @@ describe SessionsController, '#create', type: :controller do
       hash_including(admin_of: ['https://www.cobot.me/api/spaces/co-up'],
         oauth_token: '12345'))
 
-    get :create, provider: 'cobot'
+    get :create, params: { provider: 'cobot' }
   end
 
   it "creates the spaces that don't exist" do
@@ -66,7 +66,7 @@ describe SessionsController, '#create', type: :controller do
 
     expect(Space).to receive(:create).with(url: 'https://www.cobot.me/api/spaces/co-up', admins: ['joe@doe.com'])
 
-    get :create, provider: 'cobot'
+    get :create, params: { provider: 'cobot' }
   end
 
   it 'adds the user as admin to an existing space' do
@@ -75,7 +75,7 @@ describe SessionsController, '#create', type: :controller do
 
     expect(space).to receive(:update_attribute).with(:admins, ['jane@doe.com', 'joe@doe.com'])
 
-    get :create, provider: 'cobot'
+    get :create, params: { provider: 'cobot' }
   end
 
   it "adds the user to a space that hasn't set any admins" do
@@ -84,7 +84,7 @@ describe SessionsController, '#create', type: :controller do
 
     expect(space).to receive(:update_attribute).with(:admins, ['joe@doe.com'])
 
-    get :create, provider: 'cobot'
+    get :create, params: { provider: 'cobot' }
   end
 
   it 'does not add a user as admin twice' do
@@ -93,7 +93,7 @@ describe SessionsController, '#create', type: :controller do
 
     expect(space).to receive(:update_attribute).with(:admins, ['joe@doe.com'])
 
-    get :create, provider: 'cobot'
+    get :create, params: { provider: 'cobot' }
   end
 
   it 'does not create spaces that already exist' do
@@ -101,19 +101,19 @@ describe SessionsController, '#create', type: :controller do
 
     expect(Space).not_to receive(:create)
 
-    get :create, provider: 'cobot'
+    get :create, params: { provider: 'cobot' }
   end
 
   it 'sets the user id in the session' do
     allow(User).to receive(:find_by_email) {double(:user, id: 1).as_null_object}
 
-    get :create, provider: 'cobot'
+    get :create,  params: { provider: 'cobot' }
 
     expect(session[:user_id]).to eq(1)
   end
 
   it 'redirects to spaces' do
-    get :create, provider: 'cobot'
+    get :create,  params: { provider: 'cobot' }
 
     expect(response).to redirect_to(spaces_path)
   end

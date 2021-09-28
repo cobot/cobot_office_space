@@ -55,5 +55,14 @@ module OfficeSpace
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
+
+    # preserve the timezone of the receiver when calling to_time
+    ActiveSupport.to_time_preserves_timezone = true
+
+    # check the HTTP Origin against the site's origin as an additional CSRF defense
+    config.action_controller.forgery_protection_origin_check = true
+
+    # With this option turned on, forms in your application will each have their own CSRF token that is specific to the action and method for that form.
+    config.action_controller.per_form_csrf_tokens = true
   end
 end
