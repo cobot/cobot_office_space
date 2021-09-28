@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-ruby '~>2.6.5'
+ruby '2.6.8'
 
 gem 'rails', '~>5.0.0'
 gem 'pg'
@@ -15,12 +15,11 @@ gem 'puma'
 gem 'rails_same_site_cookie'
 
 group :production do
-  gem 'rails_12factor'
   gem 'uglifier'
 end
 
 gem 'jquery-rails'
-gem 'test-unit'
+
 
 # Use unicorn as the web server
 # gem 'unicorn'
@@ -38,4 +37,5 @@ group :test do
   gem 'webmock'
   gem 'launchy'
   gem 'rails-controller-testing'
+  gem 'test-unit'
 end
