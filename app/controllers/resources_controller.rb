@@ -1,5 +1,5 @@
 class ResourcesController < ApplicationController
-  before_filter :load_space, :load_category
+  before_action :load_space, :load_category
   layout 'embed'
 
   def show

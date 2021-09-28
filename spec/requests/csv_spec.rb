@@ -39,6 +39,6 @@ CSV
       body: [].to_json,
     )
 
-    get authenticate_path('cobot')
+    get authenticate_path(provider: 'cobot'), params: {}
   end
 end

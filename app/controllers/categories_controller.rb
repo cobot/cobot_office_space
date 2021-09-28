@@ -1,5 +1,5 @@
 class CategoriesController < ApplicationController
-  before_filter :load_space, :check_permission_filter
+  before_action :load_space, :check_permission_filter
   layout 'embed'
 
   def new
