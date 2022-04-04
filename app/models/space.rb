@@ -13,9 +13,9 @@ class Space < ActiveRecord::Base
   end
 
   def members
-    admin_users = User.where(email: admins)
+    admin_users = User.where(email: admins).to_a
     begin
-      cobot_client(admin_users.to_a.shift.oauth_token)
+      cobot_client(admin_users.shift.oauth_token)
         .get(subdomain, '/memberships', attributes: 'id,name')
         .map {|atts| Member.new(atts) }
     rescue RestClient::Forbidden, RestClient::Unauthorized => e
