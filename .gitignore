@@ -5,4 +5,5 @@ tmp/
 .sass-cache/
 .env
 .ruby-version
+.tool-versions
 .DS_Store
