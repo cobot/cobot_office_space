@@ -15,38 +15,27 @@
       if (hasAccess) {
         console.log('Access granted already');
         redirect();
+      } else {
+        console.log('No previous access granted');
       }
     });
   }
   
   link.addEventListener('click', function(e) {
-    if (document.hasStorageAccess && document.requestStorageAccess) {
+    if (document.requestStorageAccess) {
       e.preventDefault();
-      document.hasStorageAccess().then(
-        function successful(hasAccess) {
-          console.log('Testing if hasAccess');
-          if (hasAccess) {
-            console.log('Access granted already');
+      document.requestStorageAccess().then(
+          function successful() {
+            console.log('Access request was a success');
             redirect();
-          } else {
-            console.log('Requesting access');
-            document.requestStorageAccess().then(
-                function successful() {
-                  console.log('Access request was a success');
-                  redirect();
-                },
-                function fail() {
-                  console.log('Storage Access API call failed...');
-                });
+          },
+          function fail() {
+            console.log('Storage Access API call failed...');
           }
-        },
-        function rejected(reason) {
-          console.log('hasStorageAccess failed: ', reason);
-        }
       );
     }
   });
-
+  
   function redirect() {
     console.log('Redirecting');
     window.setTimeout(() => {
