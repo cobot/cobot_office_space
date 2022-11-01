@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   helper_method :current_user
 
   before_action :authenticate
-  after_action :remove_x_frame_options
+  prepend_before_action :remove_x_frame_options
 
   private
 
