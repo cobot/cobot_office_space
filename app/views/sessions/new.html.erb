@@ -1,10 +1,56 @@
 <div class="cb-section">
   <div class="cb-container">
-    <h1>Welcome to Office Inventory</h1>
-
-    <p>This Cobot add-on allows you to assign members to inventory and see who has rented which one.</p>
-    <p>Inventory can be desks, offices, lockers – or anything else you like.</p>
-
-    <p><%= link_to 'Sign in', "/auth/cobot", class: 'btn btn--full btn--hl btn--bigger' %> with your Cobot account.</p>
+    <p>
+      <%= link_to 'Sign in', "/auth/cobot", id: 'login-link', 
+        class: 'btn btn--full btn--primary' %>.
+    </p>
   </div>
 </div>
+
+<script type="text/javascript">
+  const link = document.querySelector('#login-link');
+
+  if (document.hasStorageAccess) {
+    document.hasStorageAccess().then(hasAccess => {
+      if (hasAccess) {
+        console.log('Access granted already');
+        redirect();
+      }
+    });
+  }
+  
+  link.addEventListener('click', function(e) {
+    if (document.hasStorageAccess && document.requestStorageAccess) {
+      e.preventDefault();
+      document.hasStorageAccess().then(
+        function successful(hasAccess) {
+          console.log('Testing if hasAccess');
+          if (hasAccess) {
+            console.log('Access granted already');
+            redirect();
+          } else {
+            console.log('Requesting access');
+            document.requestStorageAccess().then(
+                function successful() {
+                  console.log('Access request was a success');
+                  redirect();
+                },
+                function fail() {
+                  console.log('Storage Access API call failed...');
+                });
+          }
+        },
+        function rejected(reason) {
+          console.log('hasStorageAccess failed: ', reason);
+        }
+      );
+    }
+  });
+
+  function redirect() {
+    console.log('Redirecting');
+    window.setTimeout(() => {
+      location.href = link.attributes.href.value;  
+    }, 3000);
+  }
+</script>
