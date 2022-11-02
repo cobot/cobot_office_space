@@ -38,8 +38,6 @@
   
   function redirect() {
     console.log('Redirecting');
-    window.setTimeout(() => {
-      location.href = link.attributes.href.value;  
-    }, 3000);
+    location.href = link.attributes.href.value;
   }
 </script>
