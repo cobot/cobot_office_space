@@ -1,43 +1,14 @@
 <div class="cb-section">
   <div class="cb-container">
     <p>
-      <%= link_to 'Sign in', "/auth/cobot", id: 'login-link', 
-        class: 'btn btn--full btn--primary' %>.
+      <%= link_to 'Continue', "/auth/cobot", id: 'login-link', 
+        class: 'btn btn--full btn--primary btn--smaller' %>
     </p>
+    <p>If you are not redirected automatically, click 'Continue'.</p>
   </div>
 </div>
 
 <script type="text/javascript">
   const link = document.querySelector('#login-link');
-
-  if (document.hasStorageAccess) {
-    document.hasStorageAccess().then(hasAccess => {
-      if (hasAccess) {
-        console.log('Access granted already');
-        redirect();
-      } else {
-        console.log('No previous access granted');
-      }
-    });
-  }
-  
-  link.addEventListener('click', function(e) {
-    if (document.requestStorageAccess) {
-      e.preventDefault();
-      document.requestStorageAccess().then(
-          function successful() {
-            console.log('Access request was a success');
-            redirect();
-          },
-          function fail() {
-            console.log('Storage Access API call failed...');
-          }
-      );
-    }
-  });
-  
-  function redirect() {
-    console.log('Redirecting');
-    location.href = link.attributes.href.value;
-  }
+  setupItp(link);
 </script>

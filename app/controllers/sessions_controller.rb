@@ -2,7 +2,9 @@ class SessionsController < ApplicationController
   skip_before_action :authenticate, only: [:new, :create, :failure]
 
   def new
-    redirect_to spaces_path if current_user
+    if current_user
+      redirect_to spaces_path 
+    end
   end
 
   def create

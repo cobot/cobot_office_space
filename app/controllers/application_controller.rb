@@ -19,7 +19,6 @@ class ApplicationController < ActionController::Base
     unless current_user
       session[:return_to] = request.url
       render 'sessions/new'
-      # redirect_to '/auth/cobot'
     end
   end
 
