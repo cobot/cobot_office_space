@@ -18,7 +18,7 @@
  */
 function setupItp(continueElement) {
   if (document.hasStorageAccess) {
-    document.hasStorageAccess().then(hasAccess => {
+    document.hasStorageAccess().then(function (hasAccess) {
       if (hasAccess) {
         triggerContinue();
       }
