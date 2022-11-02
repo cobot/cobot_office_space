@@ -17,7 +17,8 @@ Given /^I am logged in$/ do
   }
 
   visit root_path
-  2.times { click_link 'Sign in' }
+  click_link 'Sign in'
+  click_on 'Continue' # request storage access/handle itp (intelligent tracking prevention)
 end
 
 Then /^I should be signed out$/ do
