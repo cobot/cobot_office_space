@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   helper_method :current_user
 
   before_action :authenticate
-  after_action :remove_x_frame_options
+  prepend_before_action :remove_x_frame_options
 
   private
 
@@ -18,7 +18,7 @@ class ApplicationController < ActionController::Base
   def authenticate
     unless current_user
       session[:return_to] = request.url
-      redirect_to '/auth/cobot'
+      render 'sessions/new'
     end
   end
 
