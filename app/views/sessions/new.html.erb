@@ -1,14 +1,16 @@
 <div class="cb-section">
   <div class="cb-container">
     <p>
-      <%= link_to 'Continue', "/auth/cobot", id: 'login-link', 
-        class: 'btn btn--full btn--primary btn--smaller' %>
+      <%= form_tag @auth_path, method: :post do %>
+        <%= button_tag 'Continue', id: 'login-button', 
+          class: 'btn btn--full btn--primary btn--small' %>
+      <% end %>
     </p>
     <p>If you are not redirected automatically, click 'Continue'.</p>
   </div>
 </div>
 
 <script type="text/javascript">
-  const link = document.querySelector('#login-link');
-  setupItp(link);
+  const button = document.querySelector('#login-button');
+  setupItp(button);
 </script>
