@@ -17,8 +17,7 @@ class ApplicationController < ActionController::Base
 
   def authenticate
     unless current_user
-      session[:return_to] = request.url
-      render 'sessions/new'
+      redirect_to new_session_path(origin: request.url, cobot_space_subdomain: params[:cobot_subdomain])
     end
   end
 

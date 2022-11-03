@@ -3,8 +3,14 @@ class SessionsController < ApplicationController
 
   def new
     if current_user
-      redirect_to spaces_path 
+      return redirect_to spaces_path 
     end
+
+    query = URI.encode_www_form(
+      origin: params[:origin], 
+      cobot_space_subdomain: params[:cobot_space_subdomain]
+    )
+    @auth_path = "/auth/cobot?#{query}"
   end
 
   def create
