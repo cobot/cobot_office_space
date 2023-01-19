@@ -2,7 +2,7 @@ source 'http://rubygems.org'
 
 ruby '~>2.7'
 
-gem 'railties', '~>5.0.0'
+gem 'railties', '~>7.0.4'
 gem 'actionpack'
 gem 'activerecord'
 
